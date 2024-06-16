@@ -4,23 +4,31 @@ const ghostSymbol = "^";
 const pelletSymbol = ".";
 const eatenPelletSymbol = "-";
 
+//game and key piece positions
 var pac;
 var fruit;
 var ghost;
 var game;
 
+//stores the underlying symbol that occupies the space that pacman or the ghost are currently on
 var lastPacSymbol = eatenPelletSymbol;
 var lastGhostSymbol = pelletSymbol;
 
 var score = 0;
+//keeps track of level
+var level = 1;
+//keeps track of points needed to advance to the next level
 var levelCounter = 0;
+var gameSize = 15;
 
 var nextLevelFlag = false;
 var gameOverFlag = false;
 
+//id's to keep track of the intervals
 var pacIntId;
 var ghostIntId;
 
+//direction of movement for pacman
 var direction = true;
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -59,6 +67,34 @@ function createGame(n) {
     output[ghost] = ghostSymbol;
 
     game = output;
+}
+
+function checkFlags() {
+    if (gameOverFlag) {
+        clearInterval(pacIntId);
+        clearInterval(ghostIntId);
+        gameOverFlag = false;
+        nextLevelFlag = false;
+        score = 0;
+        level = 0;
+        levelCounter = 0;
+        lastPacSymbol = eatenPelletSymbol;
+        lastGhostSymbol = pelletSymbol;
+        return true;
+    } else if (nextLevelFlag) {
+        clearInterval(pacIntId);
+        clearInterval(ghostIntId);
+        gameOverFlag = false;
+        nextLevelFlag = false;
+        level++;
+        levelCounter = 0;
+        lastPacSymbol = eatenPelletSymbol;
+        lastGhostSymbol = pelletSymbol;
+        createGame(gameSize);
+        play();
+        return true;
+    }
+    return false;
 }
 
 function displayGame() {
@@ -123,38 +159,6 @@ function moveRight() {
 
 }
 
-function play() {
-    if (gameOverFlag) {
-        clearInterval(pacIntId);
-        clearInterval(ghostIntId);
-        gameOverFlag = false;
-        score = 0;
-        levelCounter = 0;
-        lastPacSymbol = eatenPelletSymbol;
-        lastGhostSymbol = pelletSymbol;
-        return;
-    }
-
-    if (nextLevelFlag) {
-        clearInterval(pacIntId);
-        clearInterval(ghostIntId);
-        nextLevelFlag = false;
-        levelCounter = 0;
-        lastPacSymbol = eatenPelletSymbol;
-        lastGhostSymbol = pelletSymbol;
-        main();
-        return;
-    } 
-
-    if (direction) {
-        moveLeft(game)
-    } else {
-        moveRight(game)
-    }
-
-    displayGame(game);
-}
-
 function moveGhost() {
     var direction = Math.floor(Math.random() * 2)
     var n = game.length;
@@ -202,16 +206,44 @@ function moveGhost() {
     }
 }
 
-function main() {
-    var n = 15;
-    createGame(n);
+function pacman() {
 
+    if (checkFlags()) {
+        return;
+    }
+
+    if (direction) {
+        moveLeft();
+    } else {
+        moveRight();
+    }
+
+    displayGame();
+}
+
+function phantom() {
+
+    if (checkFlags()) {
+        return;
+    }
+
+    moveGhost();
+    displayGame();
+}
+
+function play() {
     pacIntId = setInterval(() => {
-        play()
+        pacman()
     }, 1000);
 
     ghostIntId = setInterval(() => {
-        moveGhost();
-        displayGame();
+        phantom()
     }, 1500);
+}
+
+function main() {
+    gameSize = 15;
+    createGame(gameSize);
+
+    play();
 }
