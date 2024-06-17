@@ -35,6 +35,7 @@ var direction = true;
 
 document.addEventListener('DOMContentLoaded', async () => {
 
+    //wait for graphics module to load correctly
     await graphics.graphicsInitialized;
 
     document.addEventListener('keydown', function(event) {
@@ -83,9 +84,9 @@ function createGame(n) {
 
 function checkFlags() {
     if (gameOverFlag) {
-        graphics.displayGameOver();
         clearInterval(pacIntId);
         clearInterval(ghostIntId);
+        graphics.displayGameOver();
         gameOverFlag = false;
         nextLevelFlag = false;
         score = 0;
@@ -246,6 +247,10 @@ function phantom() {
 }
 
 function play() {
+
+    //get rid of previous message when the game starts
+    graphics.clearMessage();
+
     pacIntId = setInterval(() => {
         pacman()
     }, 1000);

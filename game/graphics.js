@@ -3,11 +3,14 @@ import {pacSymbol, fruitSymbol, ghostSymbol, pelletSymbol, eatenPelletSymbol} fr
 const gameOverMessage = "Game Over";
 const startupMessage = "Press [Spacebar] to Start";
 
+const pulseClassName = "pulse";
+
 let currScore;
 let hiScore;
 let message;
 let board;
 
+//make sure that the element variables are initialized before being used in the module
 export const graphicsInitialized = new Promise((resolve) => {
     document.addEventListener('DOMContentLoaded', function() {
         currScore = document.getElementById('current-score');
@@ -23,12 +26,13 @@ export function updateScore(score) {
 }
 
 export function updateGame(game) {
-    let styledGame = game.map(elem => {
-        let styling = getStyling(elem);
-        return `<span class="${styling}">${elem}</span>`;
-    });
+    //clear previous frame
+    board.innerHTML = "";
 
-    board.innerHTML = styledGame.join(" ");
+    for (let i = 0; i < game.length; i++) {
+        let styling = getStyling(game[i]);
+        board.innerHTML += `<div class="${styling}">${game[i]}</div>`;
+    }
 }
 
 export function displayGameOver() {
@@ -37,10 +41,12 @@ export function displayGameOver() {
 
 export function displayStartupMessage() {
     message.textContent = startupMessage;
+    message.classList.add(pulseClassName);
 }
 
 export function clearMessage() {
     message.textContent = "";
+    message.classList.remove(pulseClassName);
 }
 
 /* Helper Functions */
