@@ -1,8 +1,10 @@
-const pacSymbol = "C";
-const fruitSymbol = "@";
-const ghostSymbol = "^";
-const pelletSymbol = ".";
-const eatenPelletSymbol = "-";
+import * as graphics from './graphics.js';
+
+export const pacSymbol = "ᗧ";
+export const fruitSymbol = "@";
+export const ghostSymbol = "ᗣ";
+export const pelletSymbol = "⚬";
+export const eatenPelletSymbol = "-";
 
 //game and key piece positions
 var pac;
@@ -31,7 +33,10 @@ var ghostIntId;
 //direction of movement for pacman
 var direction = true;
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async () => {
+
+    await graphics.graphicsInitialized;
+
     document.addEventListener('keydown', function(event) {
         console.log("Key pressed:", event.key);
         if (event.key === 'ArrowLeft') {
@@ -39,9 +44,16 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (event.key === 'ArrowRight') {
             direction = false;
         } else if (event.key === ' ') {
-            main();
+            play();
         }
     });
+
+    
+    gameSize = 15;
+    createGame(gameSize);
+
+    graphics.displayStartupMessage();
+    displayGame();
 });
 
 function createGame(n) {
@@ -71,6 +83,7 @@ function createGame(n) {
 
 function checkFlags() {
     if (gameOverFlag) {
+        graphics.displayGameOver();
         clearInterval(pacIntId);
         clearInterval(ghostIntId);
         gameOverFlag = false;
@@ -80,6 +93,7 @@ function checkFlags() {
         levelCounter = 0;
         lastPacSymbol = eatenPelletSymbol;
         lastGhostSymbol = pelletSymbol;
+        createGame(gameSize);
         return true;
     } else if (nextLevelFlag) {
         clearInterval(pacIntId);
@@ -98,8 +112,8 @@ function checkFlags() {
 }
 
 function displayGame() {
-    console.clear();
-    console.log(`| ${game.join(" ")} |`);
+    graphics.updateScore(score);
+    graphics.updateGame(game);
 }
 
 function moveLeft() {
@@ -239,11 +253,4 @@ function play() {
     ghostIntId = setInterval(() => {
         phantom()
     }, 1500);
-}
-
-function main() {
-    gameSize = 15;
-    createGame(gameSize);
-
-    play();
 }

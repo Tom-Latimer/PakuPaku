@@ -5,9 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PakuPaku</title>
     <link rel="stylesheet" href="style.css">
-    <script defer src="pakupaku.js"></script>
+    <script defer type="module" src="graphics.js"></script>
+    <script defer type="module" src="pakupaku.js"></script>
 </head>
 <body>
-    
+    <div class="game-container">
+        <div class="current-score-container">
+            <p id="current-score"></p>
+        </div>
+        <div class="hi-score-container">
+            <p id="hi-score"></p>
+        </div>
+        <div class="message-container">
+            <h1 id="message"></h1>
+        </div>
+        <div class="game-board-container">
+            <p id="game-board"></p>
+        </div>
+    </div>
 </body>
 </html>
