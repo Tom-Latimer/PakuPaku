@@ -145,7 +145,8 @@ function moveLeft() {
             break;
         case ghostSymbol:
             gameOverFlag = true;
-            break;
+            game[pac] = lastPacSymbol;
+            return;
         case eatenPelletSymbol:
             game[pac] = lastPacSymbol;
             lastPacSymbol = eatenPelletSymbol;
@@ -180,7 +181,8 @@ function moveRight() {
             break;
         case ghostSymbol:
             gameOverFlag = true;
-            break;
+            game[pac] = lastPacSymbol;
+            return;
         case eatenPelletSymbol:
             game[pac] = lastPacSymbol;
             lastPacSymbol = eatenPelletSymbol;
