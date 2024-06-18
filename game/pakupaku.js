@@ -24,6 +24,7 @@ var highScore = 0;
 var level = 1;
 //keeps track of points needed to advance to the next level
 var levelCounter = 0;
+
 var gameSize = 15;
 
 //flags to check game state
@@ -37,19 +38,25 @@ var ghostIntId;
 //direction of movement for pacman
 var direction = true;
 
+//flag to disable the start action while a game is in progress
+var mask = false;
+
 document.addEventListener('DOMContentLoaded', async () => {
 
     //wait for graphics module to load correctly
     await graphics.graphicsInitialized;
 
     document.addEventListener('keydown', function(event) {
-        console.log("Key pressed:", event.key);
+        //console.log("Key pressed:", event.key);
         if (event.key === 'ArrowLeft') {
             direction = true;
         } else if (event.key === 'ArrowRight') {
             direction = false;
         } else if (event.key === ' ') {
-            play();
+            if (!mask) {
+                mask = true;
+                play();
+            }
         }
     });
 
@@ -88,9 +95,14 @@ function createGame(n) {
 
 function checkFlags() {
     if (gameOverFlag) {
+        //stop pacman and ghost from moving
         clearInterval(pacIntId);
         clearInterval(ghostIntId);
+
+        //display game over message
         graphics.displayGameOver();
+
+        //reset game logic
         gameOverFlag = false;
         nextLevelFlag = false;
         score = 0;
@@ -98,17 +110,27 @@ function checkFlags() {
         levelCounter = 0;
         lastPacSymbol = eatenPelletSymbol;
         lastGhostSymbol = pelletSymbol;
+
+        //initialize next game if player wants to retry
         createGame(gameSize);
+
+        //enable start action
+        mask = false;
         return true;
     } else if (nextLevelFlag) {
+        //stop pacman and ghost from moving
         clearInterval(pacIntId);
         clearInterval(ghostIntId);
+
+        //reset necessary game logic for next level
         gameOverFlag = false;
         nextLevelFlag = false;
         level++;
         levelCounter = 0;
         lastPacSymbol = eatenPelletSymbol;
         lastGhostSymbol = pelletSymbol;
+
+        //create next level (new game) and restart the motion of pacman and ghost
         createGame(gameSize);
         play();
         return true;
