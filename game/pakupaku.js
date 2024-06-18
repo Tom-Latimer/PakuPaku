@@ -20,6 +20,9 @@ var lastGhostSymbol = pelletSymbol;
 var score = 0;
 //cumulative best score
 var highScore = 0;
+//value of fruit
+var fruitValue = 5;
+
 //keeps track of level
 var level = 1;
 //keeps track of points needed to advance to the next level
@@ -146,31 +149,33 @@ function displayGame() {
 function moveLeft() {
     var n = game.length;
 
+    game[pac] = lastPacSymbol;
+
+    let scoreIncrease = 1;
+
     switch (game[(pac - 1 + n) % n]) {
-        case pelletSymbol:
         case fruitSymbol:
-            game[pac] = lastPacSymbol;
+            scoreIncrease = fruitValue;
+        case pelletSymbol:
 
             lastPacSymbol = eatenPelletSymbol;
 
             //increase score
-            score++;
+            score += scoreIncrease;
 
             //increase highscore if current score caught up
             if (highScore < score) {
                 highScore = score;
             }
 
-            if (++levelCounter >= n-2) {
+            if (++levelCounter >= (n-2)) {
                 nextLevelFlag = true;
             }
             break;
         case ghostSymbol:
             gameOverFlag = true;
-            game[pac] = lastPacSymbol;
             return;
         case eatenPelletSymbol:
-            game[pac] = lastPacSymbol;
             lastPacSymbol = eatenPelletSymbol;
             break;
     }
@@ -182,31 +187,33 @@ function moveLeft() {
 function moveRight() {
     var n = game.length;
 
-    switch (game[(pac + 1) % n]) {
-        case pelletSymbol:
-        case fruitSymbol:
-            game[pac] = lastPacSymbol;
+    game[pac] = lastPacSymbol;
 
+    let scoreIncrease = 1;
+
+    switch (game[(pac + 1) % n]) {
+        case fruitSymbol:
+            scoreIncrease = fruitValue;
+        case pelletSymbol:
+            
             lastPacSymbol = eatenPelletSymbol;
 
             //increase score
-            score++;
+            score += scoreIncrease;
 
             //increase highscore if current score caught up
             if (highScore < score) {
                 highScore = score;
             }
 
-            if (++levelCounter >= n-2) {
+            if (++levelCounter >= (n-2)) {
                 nextLevelFlag = true;
             }
             break;
         case ghostSymbol:
             gameOverFlag = true;
-            game[pac] = lastPacSymbol;
             return;
         case eatenPelletSymbol:
-            game[pac] = lastPacSymbol;
             lastPacSymbol = eatenPelletSymbol;
             break;
     }
