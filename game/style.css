@@ -58,12 +58,14 @@
 
 .current-score-container {
     grid-area: current;
-    /* place-self: start; */
-    font-size: 6em;
 }
 
 .hi-score-container{
     grid-area: hi;
+}
+
+.current-score-container, .hi-score-container {
+    font-size: 6em;
 }
 
 .message-container {

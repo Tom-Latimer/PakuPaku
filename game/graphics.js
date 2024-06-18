@@ -21,8 +21,9 @@ export const graphicsInitialized = new Promise((resolve) => {
     });
 });
 
-export function updateScore(score) {
+export function updateScore(score, highScore) {
     currScore.textContent = score.toString();
+    hiScore.textContent = `HI ${highScore.toString()}`;
 }
 
 export function updateGame(game) {

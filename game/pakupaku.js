@@ -16,13 +16,17 @@ var game;
 var lastPacSymbol = eatenPelletSymbol;
 var lastGhostSymbol = pelletSymbol;
 
+//score of current run
 var score = 0;
+//cumulative best score
+var highScore = 0;
 //keeps track of level
 var level = 1;
 //keeps track of points needed to advance to the next level
 var levelCounter = 0;
 var gameSize = 15;
 
+//flags to check game state
 var nextLevelFlag = false;
 var gameOverFlag = false;
 
@@ -113,7 +117,7 @@ function checkFlags() {
 }
 
 function displayGame() {
-    graphics.updateScore(score);
+    graphics.updateScore(score, highScore);
     graphics.updateGame(game);
 }
 
@@ -126,7 +130,14 @@ function moveLeft() {
             game[pac] = lastPacSymbol;
 
             lastPacSymbol = eatenPelletSymbol;
+
+            //increase score
             score++;
+
+            //increase highscore if current score caught up
+            if (highScore < score) {
+                highScore = score;
+            }
 
             if (++levelCounter >= n-2) {
                 nextLevelFlag = true;
@@ -154,7 +165,14 @@ function moveRight() {
             game[pac] = lastPacSymbol;
 
             lastPacSymbol = eatenPelletSymbol;
+
+            //increase score
             score++;
+
+            //increase highscore if current score caught up
+            if (highScore < score) {
+                highScore = score;
+            }
 
             if (++levelCounter >= n-2) {
                 nextLevelFlag = true;
