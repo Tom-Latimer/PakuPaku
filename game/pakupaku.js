@@ -168,7 +168,7 @@ function moveLeft() {
                 highScore = score;
             }
 
-            if (++levelCounter >= (n-2)) {
+            if (++levelCounter >= (n-1)) {
                 nextLevelFlag = true;
             }
             break;
@@ -206,7 +206,7 @@ function moveRight() {
                 highScore = score;
             }
 
-            if (++levelCounter >= (n-2)) {
+            if (++levelCounter >= (n-1)) {
                 nextLevelFlag = true;
             }
             break;
