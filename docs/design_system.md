@@ -39,6 +39,7 @@ This section outlines the major components of the PakuPaku game design, includin
 - **UI Element:** The user is instructed to press spacebar to start in large text upon webpage load.
 - **Visual Style:** Uses the primary color (`#FFFF00`), ensuring it stands out against the darker background.
 
+![Start screen](start.png)
 
 ### In Game Play
 
@@ -56,7 +57,7 @@ This section outlines the major components of the PakuPaku game design, includin
 - **Description:** Controls allow the player to direct Pakupaku throughout the 1-D game board. The controls are designed to be intuitive, ensuring a seamless gaming experience.
 - **Keyboard Controls:** Players use the left and right arrow keys to move Pakupaku left and right. The control mechanism is responsive to quick changes in direction to evade ghosts.
 
-
+![In game with scoreboard](game.png)
 
 ### Scoreboard
 
@@ -92,4 +93,5 @@ The scoreboard is an essential component of PakuPaku, displaying the current sco
   - **Scores Display:** The current and high scores are updated and displayed based on the final game outcomes.
   - **Restart Option:** Users can press spacebar to restart the game.
 
+![End](gameover.png)
 
