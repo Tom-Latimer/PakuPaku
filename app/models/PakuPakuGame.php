@@ -18,9 +18,7 @@ class PakuPakuGame
     //game board containing all the pieces
     private $gameBoard = [];
 
-    //variables to hold score and game flags
-    private $score;
-    private $highScore;
+    //variables to hold game flags
     private $level;
     private $levelCounter;
     private $nextLevelFlag;
@@ -28,14 +26,10 @@ class PakuPakuGame
     private $direction;
 
     //initial game parameters
-    private $gameSize;
-    private $fruitValue;
-    
+    private $gameSize;    
 
-    public function __construct($gamesize = 15, $fruitValue = 5) {
+    public function __construct($gamesize = 15) {
         $this->gameSize = $gamesize;
-        $this->fruitValue = $fruitValue;
-        $this->highScore = 0;
         $this->pac = new Paku(0, 1.5);
         $this->ghost = new Ghost(0, 2);
         $this->initialize();
@@ -53,8 +47,11 @@ class PakuPakuGame
         return $this->gameOverFlag;
     }
 
+    public function isNextLevel() {
+        return $this->nextLevelFlag;
+    }
+
     private function initialize() {
-        $this->score = 0;
         $this->level = 0;
         $this->levelCounter = 0;
         $this->direction = true;
