@@ -58,7 +58,7 @@ class PakuPakuGame
         $this->nextLevelFlag = false;
         $this->gameOverFlag = false;
         $this->pac->setLastSymbol(self::EATEN_PELLET_SYMBOL);
-        $this->ghost->setLastSymbol(self::GHOST_SYMBOL);
+        $this->ghost->setLastSymbol(self::PELLET_SYMBOL);
         $this->createGame();
     }
 
@@ -68,7 +68,7 @@ class PakuPakuGame
         $this->level++;
         $this->levelCounter = 0;
         $this->pac->setLastSymbol(self::EATEN_PELLET_SYMBOL);
-        $this->ghost->setLastSymbol(self::GHOST_SYMBOL);
+        $this->ghost->setLastSymbol(self::PELLET_SYMBOL);
         $this->createGame();
     }
 
@@ -116,7 +116,7 @@ class PakuPakuGame
 
             $nextSymbolEaten = $pacResult[1];
 
-            if (!$gameOverResult && ++$this->levelCounter >= ($this->gameSize-1)) {
+            if (!$gameOverResult && $nextSymbolEaten != self::EATEN_PELLET_SYMBOL && ++$this->levelCounter >= ($this->gameSize-1)) {
                 $this->nextLevelFlag = true;
             }
         }
