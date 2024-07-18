@@ -62,6 +62,6 @@ class PakuPakuEngine
             'gameBoard' => $this->game->getGameBoard(),
         );
 
-        return json_encode($data);
+        return $data;
     }
 }

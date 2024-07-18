@@ -51,7 +51,7 @@ class PakuPakuGame
         return $this->nextLevelFlag;
     }
 
-    private function initialize() {
+    public function initialize() {
         $this->level = 0;
         $this->levelCounter = 0;
         $this->direction = true;
@@ -62,7 +62,7 @@ class PakuPakuGame
         $this->createGame();
     }
 
-    private function initializeNextLevel() {
+    public function initializeNextLevel() {
         $this->nextLevelFlag = false;
         $this->gameOverFlag = false;
         $this->level++;
@@ -105,7 +105,7 @@ class PakuPakuGame
         $gameOverResult = $this->isGameOver();
 
         $pacResult = $this->pac->move($this->gameBoard, $this->direction);
-        $ghostResult = $this->ghost->move($this->gameBoard);
+        $ghostResult = $this->ghost->move($this->gameBoard, null);
 
         if ($ghostResult != null) {
             $gameOverResult = $gameOverResult || $ghostResult;

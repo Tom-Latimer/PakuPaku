@@ -7,7 +7,7 @@ class Ghost extends GameEntity
         parent::__construct($position, $moveDelay, $lastSymbol);
     }
 
-    public function move(&$game, $direction = null) {
+    public function move(&$game, $direction) {
         if($this->shouldMove()) {
             $n = count($game);
     

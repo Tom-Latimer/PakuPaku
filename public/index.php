@@ -1,5 +1,18 @@
 <?php
+use PakuPaku\PakuPakuEngine;
+
 require_once('_config.php');
+
+session_start();
+
+if (!isset($_SESSION['game'])) {
+    $game = new PakuPakuEngine();
+
+    $_SESSION['game'] = $game;
+} else {
+    $game = $_SESSION['game'];
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,8 +20,10 @@ require_once('_config.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PakuPaku</title>
-    <link rel="stylesheet" href="/assets/styles/style.css">
-    <script defer src="/assets/js/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="../assets/styles/style.css">
+    <script defer src="../assets/js/jquery-3.7.1.min.js"></script>
+    <script defer type="module" src="../assets/js/graphics.js"></script>
+    <script defer type="module" src="../assets/js/pakupaku.js"></script>
 </head>
 <body>
     <div class="game-container">
