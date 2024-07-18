@@ -37,10 +37,14 @@ class PakuPakuEngine
     }
 
     public function updateGame() {
+
+        $this->calculateScore($this->game->update());
+
         if($this->game->isGameOver()) {
             $frame = $this->generateGameFrame();
             $this->game->initialize();
             $this->score = 0;
+            error_log("Update game game over triggered");
             return $frame;
         }
 
@@ -48,8 +52,6 @@ class PakuPakuEngine
             $this->game->initializeNextLevel();
             return $this->generateGameFrame();
         }
-
-        $this->calculateScore($this->game->update());
         
         return $this->generateGameFrame();
     }

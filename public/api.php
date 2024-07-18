@@ -36,6 +36,8 @@ if (isset($_SESSION['game'])) {
             break;    
     }
 
+    $_SESSION['game'] = $game;
+
     header("Content-Type: application/json");
     $encodedData = json_encode($data);
     echo $encodedData;

@@ -39,6 +39,8 @@ function play() {
     //get rid of previous message when the game starts
     graphics.clearMessage();
 
+    getGameFrame(true);
+
     gameLoop = setInterval(() => {
         getGameFrame(false);
     }, 1000);

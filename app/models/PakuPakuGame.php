@@ -102,16 +102,18 @@ class PakuPakuGame
     //returns points so that engine class can calculate score
     public function update() {
         $nextSymbolEaten = self::EATEN_PELLET_SYMBOL;
-        $gameOverResult = $this->isGameOver();
-
+        $gameOverResult = $this->gameOverFlag;
+        ERROR_LOG("value of game over before: ". json_encode($this->gameOverFlag));
         $pacResult = $this->pac->move($this->gameBoard, $this->direction);
         $ghostResult = $this->ghost->move($this->gameBoard, null);
 
         if ($ghostResult != null) {
+            error_log("Value of ghost result: " . json_encode($ghostResult));
             $gameOverResult = $gameOverResult || $ghostResult;
         }
 
         if ($pacResult != null) {
+            error_log("Value of pacresult: " . json_encode($pacResult[0]));
             $gameOverResult = $gameOverResult || $pacResult[0];
 
             $nextSymbolEaten = $pacResult[1];
@@ -124,6 +126,7 @@ class PakuPakuGame
         //set flag based on results from ghost and pacman turns
         $this->gameOverFlag = $gameOverResult;
 
+        ERROR_LOG("value of game over after: ". json_encode($this->gameOverFlag));
         return $nextSymbolEaten;
 
     }
