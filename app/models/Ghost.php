@@ -30,7 +30,7 @@ class Ghost extends GameEntity
                     $this->lastSymbol = PakuPakuGame::EATEN_PELLET_SYMBOL;
                     break;
                 case PakuPakuGame::PAC_SYMBOL;
-                    $this->lastSymbol = PakuPakuGame::PAC_SYMBOL;
+                    //$this->lastSymbol = PakuPakuGame::PAC_SYMBOL;
                     $gameOver = true;
                     break;
             }
