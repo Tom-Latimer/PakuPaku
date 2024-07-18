@@ -1,4 +1,5 @@
 <?php
+use PakuPaku\PakuPakuEngine;
 
 require_once('_config.php');
 
@@ -14,6 +15,9 @@ if (isset($_SESSION['game'])) {
     }
     error_log("Api page hit");
     switch( $action ) {
+        case "reinitialize":
+            $_SESSION['game'] = new PakuPakuEngine();
+            return;
         case "changeDirection":
             if (isset($_POST["value"])) {
                 $value = filter_var($_POST["value"], FILTER_VALIDATE_BOOLEAN);

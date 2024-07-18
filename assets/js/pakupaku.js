@@ -10,6 +10,14 @@ $(async function() {
     //wait for graphics module to load correctly
     await graphics.graphicsInitialized;
 
+    $.ajax({
+        url: '/public/api.php',
+        method: 'POST',
+        data: {
+            action: 'reinitialize'
+        }
+    });
+
     $(document).on('keydown',function(event) {
         if (event.key === 'ArrowLeft') {
             sendDirectionRequest(true);
@@ -78,7 +86,6 @@ function getGameFrame(snapshot) {
                 clearInterval(gameLoop);
                 graphics.displayGameOver();
                 mask = false;
-                return;
             }
         
             graphics.updateScore(response.score, response.highscore);
