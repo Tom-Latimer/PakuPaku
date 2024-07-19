@@ -22,7 +22,7 @@ abstract class GameEntity {
         $this->lastSymbol = $lastSymbol;
     }
 
-    private function updateLastTimeMoved() {
+    protected function updateLastTimeMoved() {
         $this->lastTimeMoved = round(microtime(true) *1000);
     }
 
@@ -31,5 +31,5 @@ abstract class GameEntity {
         return ($currentTime - $this->lastTimeMoved) >= $this->movementDelay;
     }
 
-    abstract public function move(&$game, $direction = null);
+    abstract public function move(&$game, $direction);
 }

@@ -2,7 +2,7 @@
 @font-face {
     font-family: "Munro Regular";
     src: 
-        url('fonts/munro/munro.ttf') format('truetype');
+        url('../fonts/munro/munro.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }

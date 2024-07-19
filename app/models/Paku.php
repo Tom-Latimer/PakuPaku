@@ -12,9 +12,6 @@ class Paku extends GameEntity
 
     public function move(&$game, $direction) {
         if ($this->shouldMove()) {
-            if ($direction == null) {
-                throw new \InvalidArgumentException("Direction must be passed to player for movement");
-            }
     
             $n = count($game);
         
