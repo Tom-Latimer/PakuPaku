@@ -22,6 +22,8 @@ Student Number: 300236157
 ### Starting the game
 Once the website has been launched, the game will be displayed to you. To start the game, press the spacebar on your keyboard and pacman will begin moving in a direction. After a Game Over, you can press spacebar as well to play again.
 
+![Start screen](docs/start.png)
+
 ### Moving PakuPaku
 PakuPaku will move on his own when the game starts. The left arrow makes him go left, and the right arrow will make him go right. Note that you do not need to keep pressing the arrow keys to make him move as he moves on his own; they are only used to change direction.
 
@@ -31,7 +33,13 @@ Once PakuPaku eats all the pellets and the fruit on screen, a new level will aut
 ### Score
 The current score of your game is indicated in the top left, while the top right indicates your cumulative high score. See the next section for how the score is affected by points.
 
+![In game with scoreboard](docs/game.png)
+
 ### The Goal
 The goal of the game is to see how long you can go and get a high score. Each pellet is worth one point, while the fruit is worth 5 points.  
 
 Note that the fruit **will not allow PakuPaku to eat the ghost; it only gives points**. Thus, the ghost is an immovable object which must be avoided at all costs.
+
+### Game Over
+The game ends when PakuPaku interacts with a ghost.
+![End](docs/gameover.png)
