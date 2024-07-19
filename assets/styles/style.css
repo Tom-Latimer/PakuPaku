@@ -1,0 +1,131 @@
+/* CSS Globals and Setup */
+@font-face {
+    font-family: "Munro Regular";
+    src: 
+        url('fonts/munro/munro.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --pac-color: #ffff00;
+    --ghost-color: #00ffff;
+    --fruit-color:#fe0000;
+    --arcade-font-color: #f2e9e9;
+    --arcade-background: #0c062e;
+    --arcade-secondary: #67b3b5;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes scanlines {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 7px; }
+}
+
+/* Page Elements */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Munro Regular";
+}
+
+.game-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-areas: 
+        "current . hi"
+        "message message message"
+        "game game game"
+        ". . .";
+    place-items: center;
+    height: 100vh;
+    width: 100%;
+    padding: 3rem 5rem;
+    background-color: var(--arcade-background);
+    color: var(--arcade-font-color);
+}
+
+.current-score-container {
+    grid-area: current;
+}
+
+.hi-score-container{
+    grid-area: hi;
+}
+
+.current-score-container, .hi-score-container {
+    font-size: 6em;
+}
+
+.message-container {
+    grid-area: message;
+    font-size: 3em; 
+}
+
+.game-board-container {
+    grid-area: game;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-auto-columns: 1fr;
+    grid-auto-flow: column;
+    place-items: center;
+    width: 100%;
+    font-size: 4.5em;
+    border-top: 0.3em double var(--arcade-secondary);
+    border-bottom: 0.3em double var(--arcade-secondary);
+}
+
+.current-score-container, .hi-score-container, .message-container, .game-board-container {
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none;
+}
+
+.pac {
+    color: var(--pac-color);
+}
+
+.ghost {
+    color: var(--ghost-color);
+}
+
+.fruit {
+    color: var(--fruit-color);
+}
+
+.pellet {
+    color: var(--arcade-font-color);
+}
+
+/* Misc */
+.pulse {
+    animation-duration: 2s;
+    animation-name: pulse;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 999;
+    background: repeating-linear-gradient(transparent, transparent 2px, #23143c09 2px, #0101022e 7px);
+    /* background-image: repeating-linear-gradient(transparent, transparent 1px, rgba(0, 0, 0, 0.1) 1px, rgba(0, 0, 0, 0.1) 2px); */
+    pointer-events: none;
+    animation: scanlines 3s infinite linear;
+}
